@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" width="100%" height="100%" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Title Banner -->
+  <text x="500" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">EmoGenX: System Architecture Framework</text>
+
+  <!-- Raw Dataset -->
+  <g filter="url(#shadow)">
+    <rect x="360" y="65" width="280" height="42" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+    <text x="500" y="91" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">GoEmotions Raw Split (28 Classes)</text>
+  </g>
+
+  <!-- Connectors from Dataset -->
+  <path d="M 500 107 L 500 130 L 250 130 L 250 155" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 500 107 L 500 130 L 750 130 L 750 155" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Majority vs Minority Branches -->
+  <g filter="url(#shadow)">
+    <rect x="130" y="155" width="240" height="40" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="250" y="180" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Majority Emotion Classes</text>
+
+    <rect x="630" y="155" width="240" height="40" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="750" y="180" text-anchor="middle" font-size="12" font-weight="600" fill="#1d4ed8">Minority Emotion Classes</text>
+  </g>
+
+  <!-- Generation & Purity Pipeline -->
+  <path d="M 750 195 L 750 215" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="640" y="215" width="220" height="35" rx="5" fill="#ffffff" stroke="#60a5fa" stroke-width="1.2"/>
+  <text x="750" y="237" text-anchor="middle" font-size="11" fill="#1e40af">Few-Shot Prompt Engine</text>
+
+  <path d="M 750 250 L 750 270" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="640" y="270" width="220" height="35" rx="5" fill="#ffffff" stroke="#60a5fa" stroke-width="1.2"/>
+  <text x="750" y="292" text-anchor="middle" font-size="11" fill="#1e40af">LLaMA-3-8B Generation</text>
+
+  <path d="M 750 305 L 750 325" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="630" y="325" width="240" height="45" rx="5" fill="#fef2f2" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="750" y="344" text-anchor="middle" font-size="11" font-weight="600" fill="#991b1b">Teacher Confidence Gate</text>
+  <text x="750" y="358" text-anchor="middle" font-size="10" fill="#b91c1c">(P ≥ 0.80 Filter Rule)</text>
+
+  <!-- Convergence to Augmented Dataset -->
+  <path d="M 250 195 L 250 395 L 485 395" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 750 370 L 750 395 L 515 395" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 500 395 L 500 415" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="360" y="415" width="280" height="42" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="500" y="441" text-anchor="middle" font-size="13" font-weight="600" fill="#15803d">Augmented Training Dataset</text>
+  </g>
+
+  <!-- Backbone Encoder -->
+  <path d="M 500 457 L 500 480" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <g filter="url(#shadow)">
+    <rect x="330" y="480" width="340" height="45" rx="6" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+    <text x="500" y="507" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">DeBERTa-v3 Contextual Text Encoder</text>
+  </g>
+
+  <!-- Encoder Split: Tokens vs CLS -->
+  <path d="M 400 525 L 400 560 L 220 560 L 220 580" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 600 525 L 600 560 L 680 560 L 680 580" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Left: Token Embeddings -->
+  <rect x="110" y="580" width="220" height="42" rx="5" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="220" y="598" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Token Embeddings</text>
+  <text x="220" y="613" text-anchor="middle" font-size="10" fill="#64748b">H_tokens ∈ ℝ^(L × d)</text>
+
+  <!-- Right: CLS Token -->
+  <rect x="570" y="580" width="220" height="42" rx="5" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="680" y="598" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">[CLS] Token Vector</text>
+  <text x="680" y="613" text-anchor="middle" font-size="10" fill="#64748b">h_cls ∈ ℝ^d</text>
+
+  <!-- Split from CLS: SSL Projection vs GAT -->
+  <path d="M 640 622 L 640 650 L 530 650 L 530 670" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 720 622 L 720 650 L 830 650 L 830 670" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Projection Branch -->
+  <rect x="440" y="670" width="180" height="35" rx="5" fill="#faf5ff" stroke="#a855f7" stroke-width="1.2"/>
+  <text x="530" y="692" text-anchor="middle" font-size="11" fill="#6b21a8">Projection Head (MLP)</text>
+
+  <path d="M 530 705 L 530 725" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="440" y="725" width="180" height="35" rx="5" fill="#faf5ff" stroke="#a855f7" stroke-width="1.2"/>
+  <text x="530" y="747" text-anchor="middle" font-size="11" fill="#6b21a8">Contrastive Space (z_i ∈ ℝ^128)</text>
+
+  <path d="M 530 760 L 530 780" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="430" y="780" width="200" height="38" rx="5" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5"/>
+  <text x="530" y="803" text-anchor="middle" font-size="11" font-weight="600" fill="#581c87">Multi-Label Contrastive SSL Loss</text>
+
+  <!-- GAT Branch -->
+  <rect x="740" y="670" width="180" height="35" rx="5" fill="#f0fdfa" stroke="#14b8a6" stroke-width="1.2"/>
+  <text x="830" y="692" text-anchor="middle" font-size="11" fill="#0f766e">Neuro-Symbolic GAT</text>
+
+  <path d="M 830 705 L 830 725" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="740" y="725" width="180" height="35" rx="5" fill="#f0fdfa" stroke="#14b8a6" stroke-width="1.2"/>
+  <text x="830" y="747" text-anchor="middle" font-size="11" fill="#0f766e">Label Dependency (h_graph)</text>
+
+  <!-- Concatenation -->
+  <path d="M 830 760 L 830 830 L 780 830" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 680 622 L 680 810 L 720 810" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <rect x="670" y="815" width="220" height="35" rx="5" fill="#ffffff" stroke="#64748b" stroke-width="1.2"/>
+  <text x="780" y="837" text-anchor="middle" font-size="11" font-weight="500" fill="#1e293b">Feature Concatenation [h_cls || h_graph]</text>
+
+  <!-- Classification & ASL -->
+  <path d="M 780 850 L 780 870" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="680" y="870" width="200" height="35" rx="5" fill="#ffffff" stroke="#64748b" stroke-width="1.2"/>
+  <text x="780" y="892" text-anchor="middle" font-size="11" fill="#1e293b">Classification Head</text>
+
+  <path d="M 780 905 L 780 925" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="670" y="925" width="220" height="38" rx="5" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="780" y="948" text-anchor="middle" font-size="11" font-weight="600" fill="#9a3412">Asymmetric Loss (ASL)</text>
+
+  <!-- Post-Processing: Dynamic Thresholding -->
+  <path d="M 780 963 L 780 985" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="660" y="985" width="240" height="42" rx="5" fill="#f8fafc" stroke="#475569" stroke-width="1.2"/>
+  <text x="780" y="1003" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Dynamic Thresholding Engine</text>
+  <text x="780" y="1018" text-anchor="middle" font-size="10" fill="#475569">(τ_1, τ_2, ..., τ_28 Optimization)</text>
+
+  <!-- Left Branch: Token Attribution (XAI Layer 1) -->
+  <path d="M 220 622 L 220 985" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="100" y="985" width="240" height="42" rx="5" fill="#fdf4ff" stroke="#d946ef" stroke-width="1.2"/>
+  <text x="220" y="1003" text-anchor="middle" font-size="11" font-weight="600" fill="#86198f">Layer-wise Integrated Gradients</text>
+  <text x="220" y="1018" text-anchor="middle" font-size="10" fill="#a21caf">(Token Attribution Map)</text>
+
+  <!-- Convergence to CoT Reasoner -->
+  <path d="M 220 1027 L 220 1055 L 485 1055" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 780 1027 L 780 1055 L 515 1055" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 500 1055 L 500 1075" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- LLM CoT -->
+  <rect x="360" y="1075" width="280" height="42" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="500" y="1093" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">LLaMA-3 Chain-of-Thought (CoT)</text>
+  <text x="500" y="1108" text-anchor="middle" font-size="10" fill="#1d4ed8">Natural Language Reasoner</text>
+
+  <!-- Final Output -->
+  <path d="M 500 1117 L 500 1140" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <g filter="url(#shadow)">
+    <rect x="330" y="1140" width="340" height="45" rx="6" fill="#0f172a" stroke="#0f172a" stroke-width="1.5"/>
+    <text x="500" y="1167" text-anchor="middle" font-size="12" font-weight="600" fill="#f8fafc">Final Prediction + Dual XAI Explanation</text>
+  </g>
+</svg>
